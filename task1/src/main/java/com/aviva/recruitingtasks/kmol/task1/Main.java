@@ -20,7 +20,7 @@ public class Main {
         }
 
         try {
-            System.out.println(calculator.getHolidayMonth(2018));
+            System.out.println(calculator.getHolidayMonth(2017));
         }catch (MonthException e){
             e.printStackTrace();
         }
