@@ -25,36 +25,35 @@ public class HolidayCalculator {
     }
 
     public List<Employee> getWorkingEmployees(LocalDate dateFrom, LocalDate dateTo) {
-        holidays = SampleAvivaHolidays.AVIVA_HOLIDAYS;
-        employees = SampleAvivaEmployees.AVIVA_EMPLOYEES;
+
         List<Employee> tempList = new ArrayList<>();
         List<Employee> getEmployeeList = new ArrayList<>();
         LocalDate holidayDateFrom;
         LocalDate holidayDateTo;
 
-        for (int i = 0; i < holidays.size(); i++) {
-            holidayDateFrom = holidays.get(i).getDateFrom();
-            holidayDateTo = holidays.get(i).getDateTo();
+        for (Holiday holiday : holidays) {
+            holidayDateFrom = holiday.getDateFrom();
+            holidayDateTo = holiday.getDateTo();
             if((holidayDateFrom.isEqual(dateFrom) | holidayDateFrom.isAfter(dateFrom)) & (holidayDateFrom.isEqual(dateTo) | holidayDateFrom.isBefore(dateTo))){
-                tempList.add(holidays.get(i).getEmployee());
+                tempList.add(holiday.getEmployee());
             }else{
                 if((holidayDateTo.isEqual(dateFrom) | holidayDateTo.isAfter(dateFrom)) & (holidayDateTo.isEqual(dateTo) | holidayDateTo.isBefore(dateTo))){
-                    tempList.add(holidays.get(i).getEmployee());
+                    tempList.add(holiday.getEmployee());
                 }
             }
         }
 
-        for (int i = 0; i < employees.size(); i++) {
-            if(!tempList.contains(employees.get(i))) {
-                getEmployeeList.add(employees.get(i));
+        for (Employee employee : employees) {
+            if(!tempList.contains(employee)) {
+                getEmployeeList.add(employee);
             }
         }
-        //throw new UnsupportedOperationException();
+
         return getEmployeeList;
     }
 
     public Month getHolidayMonth(int year) throws MonthException{
-        holidays = SampleAvivaHolidays.AVIVA_HOLIDAYS;
+
         monthsMap = new HashMap<>();
         Month month = Month.JANUARY;
         int temp = 0;
@@ -62,14 +61,14 @@ public class HolidayCalculator {
             monthsMap.put(Month.of(i), 0);
         }
 
-        for (int i = 0; i < holidays.size(); i++) {
-            if(holidays.get(i).getDateFrom().getYear() == year){
-                temp = monthsMap.get(holidays.get(i).getDateFrom().getMonth());
-                monthsMap.put(holidays.get(i).getDateFrom().getMonth(), temp+1);
+        for (Holiday holiday : holidays) {
+            if(holiday.getDateFrom().getYear() == year){
+                temp = monthsMap.get(holiday.getDateFrom().getMonth());
+                monthsMap.put(holiday.getDateFrom().getMonth(), temp+1);
             }
-            if((holidays.get(i).getDateTo().getYear() == year) & (holidays.get(i).getDateTo().getMonth() != holidays.get(i).getDateFrom().getMonth())){
-                temp = monthsMap.get(holidays.get(i).getDateTo().getMonth());
-                monthsMap.put(holidays.get(i).getDateTo().getMonth(), temp+1);
+            if((holiday.getDateTo().getYear() == year) & (holiday.getDateTo().getMonth() != holiday.getDateFrom().getMonth())){
+                temp = monthsMap.get(holiday.getDateTo().getMonth());
+                monthsMap.put(holiday.getDateTo().getMonth(), temp+1);
             }
         }
         temp = 0;
@@ -87,7 +86,7 @@ public class HolidayCalculator {
         if(monthsMap.get(month) == 0){
             throw new MonthException("In this year not holidays");
         }
-        //throw new UnsupportedOperationException();
+
         return month;
     }
 
