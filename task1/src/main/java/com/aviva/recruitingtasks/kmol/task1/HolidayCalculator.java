@@ -34,7 +34,7 @@ public class HolidayCalculator {
         for (Holiday holiday : holidays) {
             holidayDateFrom = holiday.getDateFrom();
             holidayDateTo = holiday.getDateTo();
-            if((holidayDateFrom.isEqual(dateFrom) | holidayDateFrom.isAfter(dateFrom)) & (holidayDateFrom.isEqual(dateTo) | holidayDateFrom.isBefore(dateTo))){
+            if((holidayDateFrom.isEqual(dateFrom) | dateFrom.isAfter(holidayDateFrom)) & (holidayDateFrom.isEqual(dateTo) | dateTo.isBefore(holidayDateTo))){
                 tempList.add(holiday.getEmployee());
             }else{
                 if((holidayDateTo.isEqual(dateFrom) | holidayDateTo.isAfter(dateFrom)) & (holidayDateTo.isEqual(dateTo) | holidayDateTo.isBefore(dateTo))){
