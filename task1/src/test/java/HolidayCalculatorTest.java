@@ -22,7 +22,7 @@ public class HolidayCalculatorTest {
     Month month;
 
     @Test
-    public void getWorkingEmployees(){
+    public void getWorkingEmployeesTest(){
 
         employeeList = new ArrayList<>();
         employeeList.add(JOHN);
@@ -46,10 +46,15 @@ public class HolidayCalculatorTest {
 
     }
 
-    @Test(expected = MonthException.class)
-    public void getHolidayMonth(){
+    @Test
+    public void getHolidayMonthTest(){
         month = Month.AUGUST;
         assertEquals(month, calculator.getHolidayMonth(2017));
+
+    }
+
+    @Test(expected = MonthException.class)
+    public void getHolidayMonthExceptionTest(){
 
         calculator.getHolidayMonth(2010);
 
